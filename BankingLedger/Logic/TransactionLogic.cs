@@ -18,6 +18,17 @@ namespace BankingLedger.Logic
             return fullTransactionList.Sum(x => x.Amount);
         }
 
+        public List<string> GetFriendList(string userName)
+        {
+            List<string> friendList = MemoryCache.Default.Select(kvp => kvp.Key).ToList();
+
+            friendList = friendList.Where(x => x.StartsWith("userName_")).Select(x=>x.Substring(9,(x.Length-9))).ToList();
+
+            friendList.Remove(userName);
+
+            return friendList;
+        }
+
         public List<Transaction> GetTransactionList(string userName)
         {
             var wholeTransactionList = new List<Transaction>();

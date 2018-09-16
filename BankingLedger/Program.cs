@@ -6,7 +6,7 @@ namespace BankingLedger
     {
         static void Main(string[] args)
         {
-            ConsoleOptionsLogic.CreateAdminUser();
+            RegistrationLogic.CreateAdminUser();
 
             ConsoleOptionsLogic.LoggedOutScreen();
         }    

@@ -16,7 +16,7 @@ namespace BankingLedger.Logic
         private static readonly ILog log = LoggerLogic.CreateLogger();
 
         public static void LoggedOutScreen(string optionalMessage = "")
-        {           
+        {
             try
             {
                 Console.Clear();
@@ -76,7 +76,7 @@ namespace BankingLedger.Logic
 
                 Console.WriteLine("Welcome back " + userNameInput + ".", Environment.NewLine);
 
-                Console.WriteLine("(1. Record Deposit) - (2. Record Withdrawl) - (3. Check Balance) - (4. Transaction History) - (5. Logout)");
+                Console.WriteLine("(1. Record Deposit) - (2. Record Withdrawl) - (3. Check Balance) - (4. Transaction History) - (5. Logout) - (6. Send Money)");
 
                 var loggedInInput = Console.ReadLine();
 
@@ -122,7 +122,61 @@ namespace BankingLedger.Logic
                 return;
             }
 
+            if (loggedInInput == "6")
+            {
+                TransferFunds(userNameInput);
+                return;
+            }
+
             LoggedInScreen(userNameInput, "Please input a number indicating an option above");
+        }
+
+        public static void TransferFunds(string userNameInput)
+        {
+            var transactionLogic = new TransactionLogic();
+
+            Console.WriteLine("which friend would you like to send money to?");
+
+            var friendList = transactionLogic.GetFriendList(userNameInput);
+
+            foreach (var friend in friendList)
+            {
+                Console.WriteLine(friend);
+            }
+
+            var friendName = Console.ReadLine();
+
+            string amountToSend = "";
+
+            if (friendList.IndexOf(friendName) != -1)
+            {
+                Console.WriteLine("Wonderful!  How much would you like to send?");
+
+                amountToSend = Console.ReadLine();
+
+                decimal parsedSendAmount;
+
+                if (!decimal.TryParse(amountToSend, out parsedSendAmount))
+                {
+                    LoggedInScreen(userNameInput, "Amount deposited must be a decimal");
+                    return;
+                }
+
+                var newDepositLogic = new DepositLogic();
+
+                newDepositLogic.CreateDeposit(userNameInput, "Online Transfer", parsedSendAmount, friendName);
+
+                var newWithdrawlLogic = new WithdrawlLogic();
+
+                newWithdrawlLogic.CreateWithdrawl(friendName, "Online Transfer", parsedSendAmount, userNameInput);
+
+            }else
+            {
+                LoggedInScreen(userNameInput, "Type friend name exactly to send funds");
+                return;
+            }
+
+            LoggedInScreen(userNameInput, "Successfully sent " + amountToSend + " to " + friendName);
         }
 
         public static void RegisterUser()
@@ -256,23 +310,6 @@ namespace BankingLedger.Logic
             }
 
             LoggedInScreen(userNameInput, "Successfully recorded " + depositType + " for: $" + depositAmount);
-        }
-
-        public static void CreateAdminUser()
-        {
-            var RegisterLogic = new RegistrationLogic();
-            RegisterLogic.RegisterNewUser("alex", "pass");
-            DepositLogic depositLogic = new DepositLogic();
-            depositLogic.CreateDeposit("Customer1", "Cash", 35, "alex");
-            depositLogic.CreateDeposit("Customer2", "Cash", 43, "alex");
-            depositLogic.CreateDeposit("Customer3", "Cash", 225, "alex");
-            depositLogic.CreateDeposit("Customer4", "Cash", 45, "alex");
-
-            WithdrawlLogic WithdrawlLogic = new WithdrawlLogic();
-            WithdrawlLogic.CreateWithdrawl("Customer1", "Check", 22, "alex");
-            WithdrawlLogic.CreateWithdrawl("Customer2", "Check", 32, "alex");
-            WithdrawlLogic.CreateWithdrawl("Customer3", "Check", 22, "alex");
-            WithdrawlLogic.CreateWithdrawl("Customer4", "Check", 45, "alex");
         }
     }
 }
