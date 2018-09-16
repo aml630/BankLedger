@@ -28,7 +28,7 @@ namespace BankingLedger.Logic
                     Console.WriteLine(optionalMessage, Environment.NewLine);
                 }
 
-                Console.WriteLine("Welcome to the worlds greatest banNking ledger! Type the number of the action you'd like to take from the list below" + Environment.NewLine);
+                Console.WriteLine("Welcome to the worlds greatest banking ledger! Type the number of the action you'd like to take from the list below" + Environment.NewLine);
 
                 Console.WriteLine("(1. Login) - (2. Create Account)");
 
