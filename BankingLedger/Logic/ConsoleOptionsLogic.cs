@@ -48,7 +48,7 @@ namespace BankingLedger.Logic
 
                 if (userNameInput == "3")
                 {
-                    throw new Exception("Test exception");
+                    throw new Exception("Trigger test exception");
                 }
 
                 LoggedOutScreen("Please input number indicating which action you'd like to take");
@@ -86,7 +86,7 @@ namespace BankingLedger.Logic
             {
                 log.Info(ex.Message);
 
-                LoggedOutScreen("There was a technical problem.  Please try your action again later");
+                LoggedInScreen(userNameInput, "There was a technical problem.  Please try your action again later");
             }
         }
 
@@ -145,7 +145,7 @@ namespace BankingLedger.Logic
             }
             else
             {
-                LoggedInScreen(newUserName, createUserResult);
+                LoggedOutScreen(createUserResult);
             }
         }
 

@@ -11,7 +11,9 @@ namespace BankingLedger.Logic
         {
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
 
-            XmlConfigurator.Configure(logRepository, new FileInfo("C:\\GitHub\\BankingLedger\\BankingLedger\\log4net.config"));
+            var currentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            XmlConfigurator.Configure(logRepository, new FileInfo(currentDirectory + "//log4net.config"));
 
             return LogManager.GetLogger(typeof(Program));
         }
