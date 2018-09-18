@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BankingLedger.Logic
 {
+    //This would NOT be a production secure registration solution with a real database.
+    //Any Authentication solution in a real project would need to be heavily discussed
+    //and tied into the project at large.  It is not something to take lightly. 
     public class RegistrationLogic
     {
         public string RegisterNewUser(string userName, string password)
@@ -30,6 +33,7 @@ namespace BankingLedger.Logic
         public static void CreateAdminUser()
         {
             var RegisterLogic = new RegistrationLogic();
+
             RegisterLogic.RegisterNewUser("alex", "pass");
             DepositLogic depositLogic = new DepositLogic();
             depositLogic.CreateDeposit("Customer1", "Cash", 35, "alex");
@@ -42,7 +46,6 @@ namespace BankingLedger.Logic
             WithdrawlLogic.CreateWithdrawl("Customer2", "Check", 32, "alex");
             WithdrawlLogic.CreateWithdrawl("Customer3", "Check", 22, "alex");
             WithdrawlLogic.CreateWithdrawl("Customer4", "Check", 45, "alex");
-
 
             RegisterLogic.RegisterNewUser("john", "pass");
 
