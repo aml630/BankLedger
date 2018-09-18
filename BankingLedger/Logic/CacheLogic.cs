@@ -7,17 +7,15 @@ using System.Threading.Tasks;
 
 namespace BankingLedger.Logic
 {
-    class CacheLogic
+    public class CacheLogic
     {
         public void ClearCache()
         {
             List<string> cacheKeys = MemoryCache.Default.Select(kvp => kvp.Key).ToList();
-            //foreach (string cacheKey in cacheKeys)
-            //{
-            //    MemoryCache.Default.Remove(cacheKey);
-            //}
-
-         
+            foreach (string cacheKey in cacheKeys)
+            {
+                MemoryCache.Default.Remove(cacheKey);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankingLedger.Logic
 {
-    class RegistrationLogic
+    public class RegistrationLogic
     {
         public string RegisterNewUser(string userName, string password)
         {

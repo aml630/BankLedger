@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankingLedger.Logic
 {
-    class TransactionLogic
+   public class TransactionLogic
     {
 
         public decimal GetBalance(string userName)

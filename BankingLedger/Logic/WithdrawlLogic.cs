@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankingLedger.Logic
 {
-    class WithdrawlLogic
+   public class WithdrawlLogic
     {
         public Withdrawl CreateWithdrawl(string paymentTo, string paymentMethod, decimal amount, string userName, string note = "")
         {

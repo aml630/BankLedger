@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankingLedger.Logic
 {
-    class DepositLogic
+    public class DepositLogic
     {
         public Deposit CreateDeposit(string receivedFrom, string paymentMethod, decimal amount, string userName, string note = "")
         {
