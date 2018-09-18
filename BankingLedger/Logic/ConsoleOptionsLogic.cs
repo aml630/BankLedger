@@ -223,7 +223,7 @@ namespace BankingLedger.Logic
 
             if (!AuthLogic.LoginUser(userNameInput, passwordInput))
             {
-                LoggedOutScreen("That username/password doesn't exist in our system. Please create an account");
+                LoggedOutScreen("That username doesn't exist in our system or the password was wrong. Please create an account");
 
                 return;
             }
